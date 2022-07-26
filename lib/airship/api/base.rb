@@ -131,21 +131,11 @@ module Airship
       end
 
       def track_prometheus_request
-        PrometheusMetrics.observe(
-          :third_party_requests_total,
-          1,
-          provider: 'airship',
-          action:   api_endpoint
-        )
+        Airship.config.request_tracker.call(api_endpoint)
       end
 
       def track_prometheus_error(response_code)
-        PrometheusMetrics.observe(
-          :third_party_errors_total,
-          1,
-          provider:          'airship',
-          unexpected_status: response_code
-        )
+        Airship.config.error_tracker.call(api_endpoint, response_code)
       end
 
       def channel_not_found_error?(response)

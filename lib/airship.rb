@@ -2,7 +2,13 @@
 
 require_relative 'airship/version'
 
+require 'active_support/configurable'
+
 module Airship
+  include ActiveSupport::Configurable
+  Airship.config.request_tracker ||= Proc.new {|api_endpoint| nil }
+  Airship.config.error_tracker   ||= Proc.new {|api_endpoint, response_code| nil }
+
   require_relative 'airship/api/base'
   require_relative 'airship/api/channel_uninstall'
   require_relative 'airship/api/custom_event_create'
