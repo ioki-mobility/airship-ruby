@@ -11,11 +11,11 @@ require 'webmock/rspec'
 
 # TODO: move to proper Metrics-class
 class PrometheusMetrics
-  def self.observe arg1=nil, arg2=nil, arg3={}
+  def self.observe(arg1 = nil, arg2 = nil, arg3 = {})
   end
 end
 
-Airship.config.request_tracker = Proc.new do |api_endpoint| 
+Airship.config.request_tracker = proc do |api_endpoint|
   PrometheusMetrics.observe(
     :third_party_requests_total,
     1,
@@ -24,7 +24,7 @@ Airship.config.request_tracker = Proc.new do |api_endpoint|
   )
 end
 
-Airship.config.error_tracker = Proc.new do |api_endpoint, response_code| 
+Airship.config.error_tracker = proc do |_api_endpoint, response_code|
   PrometheusMetrics.observe(
     :third_party_errors_total,
     1,
@@ -32,7 +32,6 @@ Airship.config.error_tracker = Proc.new do |api_endpoint, response_code|
     unexpected_status: response_code
   )
 end
-
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 

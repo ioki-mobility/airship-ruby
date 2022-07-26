@@ -6,8 +6,8 @@ require 'active_support/configurable'
 
 module Airship
   include ActiveSupport::Configurable
-  Airship.config.request_tracker ||= Proc.new {|api_endpoint| nil }
-  Airship.config.error_tracker   ||= Proc.new {|api_endpoint, response_code| nil }
+  Airship.config.request_tracker ||= proc { |_api_endpoint| }
+  Airship.config.error_tracker   ||= proc { |_api_endpoint, _response_code| }
 
   require_relative 'airship/api/base'
   require_relative 'airship/api/channel_uninstall'
