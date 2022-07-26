@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-#require 'rails_helper'
 
 RSpec.describe Airship::Api::NamedUserAssociateEmail do
   subject { described_class.call(operation_params) }
+
   let(:operation_params) do
     {
       app_key:       app_key,
