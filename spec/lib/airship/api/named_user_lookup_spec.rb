@@ -27,7 +27,7 @@ RSpec.describe Airship::Api::NamedUserLookup do
         "named_user": {
             "named_user_id": "harry.potter",
             "tags": {
-                "triebwerk": ["locked"]
+                "prison_of_azkaban": ["locked"]
             },
             "created": "2020-03-30T14:38:49",
             "last_modified": "2020-03-31T09:57:32",
@@ -43,7 +43,7 @@ RSpec.describe Airship::Api::NamedUserLookup do
                 "tags": [],
                 "tag_groups": {
                     "ua_channel_type": ["email"],
-                    "triebwerk": ["locked"],
+                    "prison_of_azkaban": ["locked"],
                     "timezone": ["Europe/Paris"],
                     "named_user_id": ["f4f489d7-bb08-4be6-b7a6-0775d3e7f591"],
                     "ua_locale_language": ["en"],
