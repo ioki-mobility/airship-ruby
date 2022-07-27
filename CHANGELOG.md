@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+- Cleaned up specs from legacy tracker-class usage
+
 ## [0.1.1] - 2022-07-27
 
 - Added README including CI-status

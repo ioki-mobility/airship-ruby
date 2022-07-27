@@ -42,11 +42,11 @@ module Airship
       CHANNEL_NOT_FOUND_ERROR_REGEX = /Channel ID .*does not exist.*/i.freeze
 
       def call
-        track_prometheus_request
+        track_request
         response = process_request
 
         unless [200, 201, 202].include?(response.status)
-          track_prometheus_error(response.status)
+          track_error(response.status)
           raise Unauthorized if response.status == 401
           raise Forbidden if response.status == 403
           raise ChannelNotFound, error_message_from_response(response) if channel_not_found_error?(response)
@@ -130,11 +130,11 @@ module Airship
         {}.to_json
       end
 
-      def track_prometheus_request
+      def track_request
         Airship.config.request_tracker.call(api_endpoint)
       end
 
-      def track_prometheus_error(response_code)
+      def track_error(response_code)
         Airship.config.error_tracker.call(api_endpoint, response_code)
       end
 
