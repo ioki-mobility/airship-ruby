@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 RSpec.describe Airship::Api::CustomEventCreate do
   subject { described_class.call(operation_params) }
 
@@ -49,7 +48,22 @@ RSpec.describe Airship::Api::CustomEventCreate do
   let(:response_status) { 200 }
   let(:response_body) { { 'ok' => true, 'operationId' => '2eac7ca7-ce2f-4242-90b6-56172847a5d8' }.to_json }
 
+  let(:request_tracker) do
+    proc do |api_endpoint|
+      api_endpoint
+    end
+  end
+
+  let(:error_tracker) do
+    proc do |api_endpoint, response_code|
+      [api_endpoint, response_code]
+    end
+  end
+
   before do
+    allow(Airship.config).to receive(:request_tracker).and_return(request_tracker)
+    allow(Airship.config).to receive(:error_tracker).and_return(error_tracker)
+
     stub_request(:post, expected_full_path)
       .with(
         headers: {
@@ -71,24 +85,13 @@ RSpec.describe Airship::Api::CustomEventCreate do
     expect(subject).to eq JSON.parse(response_body)
   end
 
-  it 'tracks the request with Prometheus' do
-    expect(PrometheusMetrics).to receive(:observe).with(
-      :third_party_requests_total,
-      1,
-      provider: 'airship',
-      action:   expected_endpoint
-    )
-
+  it 'tracks the request with configured tracker' do
+    expect(request_tracker).to receive(:call).with(expected_endpoint)
     subject
   end
 
-  it 'doesn\'t track an error with Prometheus' do
-    expect(PrometheusMetrics).not_to receive(:observe).with(
-      :third_party_errors_total,
-      1,
-      hash_including(provider: 'airship')
-    )
-
+  it 'doesn\'t track an error with configured tracker' do
+    expect(error_tracker).not_to receive(:call)
     subject
   end
 
@@ -124,23 +127,9 @@ RSpec.describe Airship::Api::CustomEventCreate do
       expect { subject }.to raise_error Airship::Api::Unauthorized
     end
 
-    it 'tracks the request and the according error with Prometheus' do
-      expect(PrometheusMetrics).to receive(:observe).with(
-        :third_party_requests_total,
-        1,
-        provider: 'airship',
-        action:   expected_endpoint
-      ).ordered
-
-      expect(PrometheusMetrics).to receive(:observe).with(
-        :third_party_errors_total,
-        1,
-        hash_including(
-          provider:          'airship',
-          unexpected_status: response_status
-        )
-      ).ordered
-
+    it 'tracks the request and the according error with configured trackers' do
+      expect(request_tracker).to receive(:call).with(expected_endpoint)
+      expect(error_tracker).to receive(:call).with(expected_endpoint, response_status)
       expect { subject }.to raise_error Airship::Api::Unauthorized
     end
   end
