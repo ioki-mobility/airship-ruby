@@ -44,8 +44,7 @@ end
 To load this gem run:
 ```ruby
 require 'airship'
-end
-
+```
 
 To perform any Api call:
 ```ruby
