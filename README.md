@@ -31,7 +31,7 @@ Airship.config.request_tracker = proc do |api_endpoint|
   )
 end
 
-Airship.config.error_tracker = proc do |_api_endpoint, response_code|
+Airship.config.error_tracker = proc do |api_endpoint, response_code|
   MyErrorMonitoringService.track_error(
     :airship_request_failed,
     endpoint: api_endpoint,
