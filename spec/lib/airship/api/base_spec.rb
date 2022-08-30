@@ -138,7 +138,8 @@ RSpec.describe Airship::Api::Base do
         context 'when error description is about an unfound channel-id' do
           let(:response_status) { 400 }
           let(:response_body) do
-            '{"ok":false,"error":"Channel ID [[c7625a59-e576-49da-a68b-1c0ae62de112]] does not exist.","error_code":40001}'
+            '{"ok":false,"error":"Channel ID [[c7625a59-e576-49da-a68b-1c0ae62de112]] does not exist.",' \
+              '"error_code":40001}'
           end
 
           it 'is expected not to succeed with Airship::Api::ChannelNotFound' do
@@ -149,7 +150,9 @@ RSpec.describe Airship::Api::Base do
         context 'when error description is about an unknown email' do
           let(:response_status) { 400 }
           let(:response_body) do
-            '{"ok":false,"error":"Could not parse request body.","error_code":40022,"details":{"error":"Channel id does not exist for email address airship-dummy.6b9a0f99-eea7-4ff2-b26a-815551b9b8b1@example.com"}}'
+            '{"ok":false,"error":"Could not parse request body.","error_code":40022,' \
+              '"details":{"error":"Channel id does not exist for email address ' \
+              'airship-dummy.6b9a0f99-eea7-4ff2-b26a-815551b9b8b1@example.com"}}'
           end
 
           it 'is expected not to succeed with Airship::Api::ChannelNotFound' do
