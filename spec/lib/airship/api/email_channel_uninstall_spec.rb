@@ -81,11 +81,6 @@ RSpec.describe Airship::Api::EmailChannelUninstall do
       '{"ok":false,"error":"Unauthorized","error_code":40101}'
     end
 
-    let(:response_status) { 401 }
-    let(:response_body) do
-      '{"ok":false,"error":"Unauthorized","error_code":40101}'
-    end
-
     it 'is expected not to succeed' do
       expect { subject }.to raise_error Airship::Api::Unauthorized
     end
