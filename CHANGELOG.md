@@ -1,5 +1,13 @@
 ## [Unreleased]
 
+## [0.1.3] - 2022-09-20
+
+- Add guard-support for rspec
+
+## [0.1.2] - 2022-08-30
+
+- Update `rubocop` and `rubocop-rspec` dependencies
+- Use public triebwerk rubocop-config
 - Cleaned up specs from legacy tracker-class usage
 
 ## [0.1.1] - 2022-07-27
