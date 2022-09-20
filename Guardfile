@@ -5,8 +5,6 @@
 
 guard :rspec, cmd: "bundle exec #{'bin/spring' if ENV.fetch('USE_SPRING', 'no') == 'yes'} " \
                    'rspec --format=documentation --tag focus' do
-  # watch(%r{.*}) { |m| puts "Change detected on #{m.inspect}"; nil }
-
   watch(%r{^spec/.+_spec\.rb$})
 
   watch(%r{^lib/(.+)\.rb$}) do |m|
