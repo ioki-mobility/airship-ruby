@@ -81,31 +81,21 @@ RSpec.describe Airship::Api::NamedUserAssociateEmail do
   context 'when failing with HTTP status-code 400 and missing channel' do
     let(:response_status) { 400 }
     let(:response_body) do
-      '{"ok":false,"error":"Unauthorized","error_code":40101}'
-    end
-
-    let(:response_status) { 401 }
-    let(:response_body) do
-      '{"ok":false,"error":"Unauthorized","error_code":40101}'
+      '{"ok":false,"error":"could not find channel"}'
     end
 
     it 'is expected not to succeed' do
-      expect { subject }.to raise_error Airship::Api::Unauthorized
+      expect { subject }.to raise_error Airship::Api::UnexpectedResponseCode
     end
 
     it 'tracks the request and the according error with configured trackers' do
       expect(request_tracker).to receive(:call).with(expected_endpoint)
       expect(error_tracker).to receive(:call).with(expected_endpoint, response_status)
-      expect { subject }.to raise_error Airship::Api::Unauthorized
+      expect { subject }.to raise_error Airship::Api::UnexpectedResponseCode
     end
   end
 
   context 'when responding with any failing HTTP status-code' do
-    let(:response_status) { 401 }
-    let(:response_body) do
-      '{"ok":false,"error":"Unauthorized","error_code":40101}'
-    end
-
     let(:response_status) { 401 }
     let(:response_body) do
       '{"ok":false,"error":"Unauthorized","error_code":40101}'

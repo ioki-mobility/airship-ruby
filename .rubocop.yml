@@ -10,6 +10,3 @@ inherit_from:
 RSpec/NestedGroups:
   Exclude:
     - 'spec/lib/airship/api/base_spec.rb'
-
-RSpec/OverwritingSetup:
-  Enabled: false
