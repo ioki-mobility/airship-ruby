@@ -103,6 +103,24 @@ RSpec.describe Airship::Api::CustomEventCreate do
     end
   end
 
+  context 'when occured_at gets passed with some Timezone' do
+    context 'as String object' do
+      let(:occurred_at) { Time.zone.local(2020, 3, 13, 17, 30, 45).in_time_zone('Berlin').iso8601 }
+
+      it 'is expected to still use the is08601 string in UTC within the request-footprint' do
+        expect { subject }.not_to raise_error
+      end
+    end
+
+    context 'as DateTime object' do
+      let(:occurred_at) { Time.zone.local(2020, 3, 13, 17, 30, 45).in_time_zone('Berlin') }
+
+      it 'is expected to still use the is08601 string in UTC within the request-footprint' do
+        expect { subject }.not_to raise_error
+      end
+    end
+  end
+
   context 'when additional_paylaod is not a flat object' do
     let(:additional_payload) do
       {
