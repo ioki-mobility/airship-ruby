@@ -24,7 +24,8 @@ module Airship
 
         [
           {
-            occurred: occurred_at.is_a?(String) ? occurred_at : occurred_at.to_s(:iso8601),
+            # ISO8601 in UTC
+            occurred: occurred,
             user:     {
               named_user_id: named_user_id
             },
@@ -42,6 +43,16 @@ module Airship
         return if additional_payload.values.none? { |v| v.is_a? Hash }
 
         raise ArgumentError, 'additional_payload must not be nested'
+      end
+
+      def occurred
+        time = if occurred_at.is_a?(String)
+                 Time.parse(occurred_at)
+               else
+                 occurred_at
+               end
+
+        time.utc.iso8601
       end
     end
   end
