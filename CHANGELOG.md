@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+## [0.1.4] - 2022-09-22
+
+- Transform all is8601 strings to be in UTC
 ## [0.1.3] - 2022-09-20
 
 - Add guard-support for rspec
