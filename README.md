@@ -1,6 +1,21 @@
 # airship-ruby [![CI Status](https://github.com/ioki-mobility/airship-ruby/actions/workflows/main.yml/badge.svg)](https://github.com/ioki-mobility/airship-ruby/actions/workflows/main.yml)
 
-This library helps to integrate the Airship's web-api.
+This library helps to integrate the [Airship's web-api](https://docs.airship.com/api/ua/).
+Currently it provides these api-primitives:
+* NamedUser handling
+  * [lookup](https://docs.airship.com/api/ua/#operation/api/named_users/get)
+  * [update Tags](https://docs.airship.com/api/ua/#operation/api/named_users/uninstall/post)
+  * [associate with Email channel](https://docs.airship.com/api/ua/#operation/api/named_users/associate/post)
+  * [uninstall](https://docs.airship.com/api/ua/#operation/api/named_users/uninstall/post)
+* General Channel handling
+  * [uninstall](https://docs.airship.com/api/ua/#operation/api/channels/uninstall/post)
+* Email Channel handling
+  * [lookup](https://docs.airship.com/api/ua/#operation/api/channels/email/email_channel_id/get)
+  * [create](https://docs.airship.com/api/ua/#operation/api/channels/email/post)
+  * [update](https://docs.airship.com/api/ua/#operation/api/channels/email/email_channel_id/put)
+  * [uninstall](https://docs.airship.com/api/ua/#operation/api/channels/email/uninstall/post)
+* Custom UserEvent handling
+  * [create](https://docs.airship.com/api/ua/#operation/api/custom-events/post)
 
 ## Installation
 
