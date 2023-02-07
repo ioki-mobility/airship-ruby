@@ -11,8 +11,7 @@ module Airship
       receives :token
 
       receives :named_user_id
-      receives :first_name
-      receives :last_name
+      receives :attributes_with_values
       receives :updated_at
 
       protected
@@ -23,21 +22,19 @@ module Airship
 
       def request_body
         {
-          attributes: [
-            {
-              action:    'set',
-              key:       'first_name',
-              value:     first_name,
-              timestamp: updated
-            },
-            {
-              action:    'set',
-              key:       'last_name',
-              value:     last_name,
-              timestamp: updated
-            }
-          ]
+          attributes: parse_attributes
         }.to_json
+      end
+
+      def parse_attributes
+        attributes_with_values.map do |attribute, value|
+          {
+            action:    'set',
+            key:       attribute,
+            value:     value,
+            timestamp: updated
+          }
+        end
       end
 
       def updated
@@ -49,7 +46,6 @@ module Airship
 
         time.strftime('%Y-%m-%d %H:%M:%S')
       end
-
     end
   end
 end
