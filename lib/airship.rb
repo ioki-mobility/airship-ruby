@@ -20,4 +20,6 @@ module Airship
   require_relative 'airship/api/named_user_lookup'
   require_relative 'airship/api/named_user_tags_update'
   require_relative 'airship/api/named_user_uninstall'
+  require_relative 'airship/api/named_user_attributes_update'
+
 end
