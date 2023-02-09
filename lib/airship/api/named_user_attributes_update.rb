@@ -11,7 +11,7 @@ module Airship
       receives :token
 
       receives :named_user_id
-      receives :attributes_with_values
+      receives :attributes
       receives :updated_at
 
       protected
@@ -22,11 +22,11 @@ module Airship
 
       def request_body
         {
-          attributes: parse_attributes
+          attributes: build_attributes
         }.to_json
       end
 
-      def parse_attributes
+      def build_attributes
         attributes_with_values.map do |attribute, value|
           {
             action:    'set',
