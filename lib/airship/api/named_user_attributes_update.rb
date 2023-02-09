@@ -27,7 +27,7 @@ module Airship
       end
 
       def build_attributes
-        attributes_with_values.map do |attribute, value|
+        attributes.map do |attribute, value|
           {
             action:    'set',
             key:       attribute,
