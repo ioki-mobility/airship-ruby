@@ -8,7 +8,7 @@ RSpec.describe Airship::Api::NamedUserAttributesUpdate do
       app_key:                app_key,
       token:                  token,
       named_user_id:          named_user_id,
-      attributes_with_values: {first_name: first_name, last_name: last_name },
+      attributes_with_values: { first_name: first_name, last_name: last_name },
       updated_at:             updated_at
     }
   end
