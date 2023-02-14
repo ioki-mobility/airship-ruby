@@ -5,8 +5,6 @@ module Airship
     # see also documentation:
     # - Named Users Update Attributes => https://docs.airship.com/api/ua/#operation-api-named_users-named_user_id-attributes-post
     class NamedUserAttributesUpdate < Base
-      TAG_GROUP_NAMESPACE = :ioki
-
       receives :app_key
       receives :token
 
