@@ -24,8 +24,8 @@ module Airship
         {
           channel: {
             type:                   'email',
-            commercial_opted_in:    commercial_opted_in&.to_s(:iso8601),
-            transactional_opted_in: transactional_opted_in&.to_s(:iso8601),
+            commercial_opted_in:    commercial_opted_in&.to_fs(:iso8601),
+            transactional_opted_in: transactional_opted_in&.to_fs(:iso8601),
             address:                email,
             timezone:               timezone,
             locale_language:        locale_language
