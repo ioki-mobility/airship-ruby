@@ -3,6 +3,7 @@
 require 'bundler/setup'
 require 'airship'
 require 'faraday'
+require 'active_support'
 require 'active_support/core_ext/string'
 require 'active_support/core_ext/hash/indifferent_access'
 require 'active_support/core_ext/securerandom'
