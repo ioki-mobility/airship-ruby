@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+## [0.2] - 2023-12-21
+- Support for listing (iterating) named users
+
 ## [0.1.4] - 2022-09-22
 
 - Transform all is8601 strings to be in UTC
