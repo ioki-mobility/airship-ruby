@@ -18,7 +18,9 @@ RSpec.describe Airship::Api::NamedUsers do
   let(:page_size) { 2 }
 
   let(:expected_endpoint) { 'named_users' }
-  let(:expected_full_path) { described_class::AIRSHIP_API_BASE_URL + expected_endpoint + "?page=#{page}&page_size=#{page_size}" }
+  let(:expected_full_path) do
+    described_class::AIRSHIP_API_BASE_URL + expected_endpoint + "?page=#{page}&page_size=#{page_size}"
+  end
 
   let(:response_status) { 200 }
   let(:response_body) do
@@ -110,8 +112,8 @@ RSpec.describe Airship::Api::NamedUsers do
   describe '#each_batch' do
     let(:page_size) { 2 }
 
-    let(:expected_full_path_1) { described_class::AIRSHIP_API_BASE_URL + expected_endpoint + "?page=1&page_size=2" }
-    let(:expected_full_path_2) { described_class::AIRSHIP_API_BASE_URL + expected_endpoint + "?page=2&page_size=2" }
+    let(:expected_full_path_1) { described_class::AIRSHIP_API_BASE_URL + expected_endpoint + '?page=1&page_size=2' }
+    let(:expected_full_path_2) { described_class::AIRSHIP_API_BASE_URL + expected_endpoint + '?page=2&page_size=2' }
 
     let(:response_body_2) do
       <<-JSON
@@ -139,7 +141,7 @@ RSpec.describe Airship::Api::NamedUsers do
     it 'makes multiple requests and yields the single named user records' do
       all_data = []
 
-      described_class.each(page_size:) do |data|
+      described_class.each(page_size: page_size) do |data|
         all_data << data
       end
 

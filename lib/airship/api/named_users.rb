@@ -21,7 +21,7 @@ module Airship
           loop do
             page += 1
 
-            operation_instance = new(options.merge(page:, page_size:))
+            operation_instance = new(options.merge(page: page, page_size: page_size))
             result = operation_instance.call
             named_users = Array(result['named_users'])
 
