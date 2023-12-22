@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+## [0.2.1] - 2023-12-22
+- Bugfix: Following named user listings across multiple pages
+
 ## [0.2.0] - 2023-12-21
 - Support for listing (iterating) named users
 
