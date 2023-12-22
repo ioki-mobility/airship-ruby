@@ -8,20 +8,16 @@ module Airship
       receives :app_key
       receives :token
 
-      receives :page
-      receives :page_size
+      receives :additional_query_params
 
       class << self
         def each(options = {})
           raise ArgumentError, 'argument must be a Hash' unless options.is_a?(Hash)
 
-          page = 0
-          page_size = options[:page_size] || 1000
+          additional_query_params = {}
 
           loop do
-            page += 1
-
-            operation_instance = new(options.merge(page: page, page_size: page_size))
+            operation_instance = new(options.merge(additional_query_params: additional_query_params))
             result = operation_instance.call
             named_users = Array(result['named_users'])
 
@@ -29,7 +25,12 @@ module Airship
               yield named_user
             end
 
-            return if named_users.size < page_size
+            break if named_users.size == 0
+            break if result['next_page'].nil? || result['next_page'] == ''
+
+            uri = URI(result['next_page'])
+
+            additional_query_params = URI.decode_www_form(uri.query).to_h
           end
         end
       end
@@ -41,10 +42,7 @@ module Airship
       end
 
       def request_parameters
-        {
-          page:      page || 1,
-          page_size: page_size || 1000
-        }
+        {}.merge(additional_query_params || {})
       end
 
       def process_request

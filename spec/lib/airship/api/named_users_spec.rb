@@ -19,13 +19,14 @@ RSpec.describe Airship::Api::NamedUsers do
 
   let(:expected_endpoint) { 'named_users' }
   let(:expected_full_path) do
-    described_class::AIRSHIP_API_BASE_URL + expected_endpoint + "?page=#{page}&page_size=#{page_size}"
+    described_class::AIRSHIP_API_BASE_URL + expected_endpoint
   end
 
   let(:response_status) { 200 }
   let(:response_body) do
     <<-JSON
       {
+        "ok": true,
         "named_users": [
           {
             "named_user_id": "harry.potter",
@@ -41,7 +42,8 @@ RSpec.describe Airship::Api::NamedUsers do
                 "device_type": "email"
             }]
           }
-        ]
+        ],
+        "next_page": "#{described_class::AIRSHIP_API_BASE_URL + expected_endpoint + '?start=wonder.woman'}"
       }
     JSON
   end
@@ -112,8 +114,8 @@ RSpec.describe Airship::Api::NamedUsers do
   describe '#each_batch' do
     let(:page_size) { 2 }
 
-    let(:expected_full_path_1) { described_class::AIRSHIP_API_BASE_URL + expected_endpoint + '?page=1&page_size=2' }
-    let(:expected_full_path_2) { described_class::AIRSHIP_API_BASE_URL + expected_endpoint + '?page=2&page_size=2' }
+    let(:expected_full_path_1) { described_class::AIRSHIP_API_BASE_URL + expected_endpoint }
+    let(:expected_full_path_2) { described_class::AIRSHIP_API_BASE_URL + expected_endpoint + '?start=wonder.woman' }
 
     let(:response_body_2) do
       <<-JSON
