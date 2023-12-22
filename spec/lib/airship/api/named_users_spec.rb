@@ -43,7 +43,7 @@ RSpec.describe Airship::Api::NamedUsers do
             }]
           }
         ],
-        "next_page": "#{described_class::AIRSHIP_API_BASE_URL + expected_endpoint + "?start=wonder.woman"}"
+        "next_page": "#{described_class::AIRSHIP_API_BASE_URL + expected_endpoint + '?start=wonder.woman'}"
       }
     JSON
   end

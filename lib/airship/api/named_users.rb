@@ -25,12 +25,12 @@ module Airship
               yield named_user
             end
 
-            break if (named_users.size == 0)
+            break if named_users.size == 0
             break if result['next_page'].nil? || result['next_page'] == ''
 
             uri = URI(result['next_page'])
 
-            additional_query_params = URI::decode_www_form(uri.query).to_h
+            additional_query_params = URI.decode_www_form(uri.query).to_h
           end
         end
       end
