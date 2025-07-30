@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.2.2] - 2025-07-30
+- Update to ruby 3.4
+- Ready for rails 8
+
 ## [0.2.1] - 2023-12-22
 - Bugfix: Following named user listings across multiple pages
 
