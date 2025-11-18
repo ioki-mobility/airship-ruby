@@ -1,12 +1,11 @@
-plugins:
+require:
   - rubocop-rspec
-  - rubocop-factory_bot
 
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.0
 
 inherit_from:
-  - https://dbdrive.github.io/triebwerk/rubocop_common.yml
+  - rubocop_common.yml
 
 RSpec/NestedGroups:
   Exclude:
