@@ -5,7 +5,7 @@ AllCops:
   TargetRubyVersion: 3.0
 
 inherit_from:
-  - rubocop_common.yml
+  - .rubocop_common.yml
 
 RSpec/NestedGroups:
   Exclude:
