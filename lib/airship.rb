@@ -2,6 +2,7 @@
 
 require_relative 'airship/version'
 
+require 'base64'
 require 'active_support/configurable'
 
 module Airship

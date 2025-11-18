@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'airship'
 require 'faraday'
 require 'active_support'
 require 'active_support/core_ext/string'
@@ -12,6 +11,7 @@ require 'active_support/version'
 require 'active_support/deprecation' if ActiveSupport::VERSION::MAJOR > 6
 require 'active_support/isolated_execution_state' if ActiveSupport::VERSION::MAJOR > 6
 require 'webmock/rspec'
+require 'airship'
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 Time.zone = 'UTC'
